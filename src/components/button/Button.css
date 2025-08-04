@@ -1,0 +1,40 @@
+button {
+  position: relative;
+  background-color: #000;
+  color: white;
+  padding: 1.3em 2.5em;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 0.3s ease;
+}
+
+/* Efecto radial desde el centro */
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: -1;
+  transition: transform 0.5s ease;
+}
+
+/* Hover: activa la expansión del fondo blanco */
+button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Hover: cambia el texto y el borde */
+button:hover {
+  color: black;
+  border: 2px solid black;
+}
