@@ -1,0 +1,44 @@
+// grid.scss
+
+$gutter: 16px;
+$columns: 12;
+
+$breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 900px,
+  lg: 1200px,
+  xl: 1536px,
+);
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(#{$columns}, 1fr);
+  gap: $gutter;
+  padding: $gutter;
+}
+
+.grid-item {
+  padding: $gutter;
+  text-align: center;
+}
+
+// Generar clases para cada breakpoint y columna
+@each $breakpoint, $min-width in $breakpoints {
+  @if $min-width == 0 {
+    // sin media query
+    @for $i from 1 through $columns {
+      .col-#{$breakpoint}-#{$i} {
+        grid-column: span #{$i};
+      }
+    }
+  } @else {
+    @media (min-width: #{$min-width}) {
+      @for $i from 1 through $columns {
+        .col-#{$breakpoint}-#{$i} {
+          grid-column: span #{$i};
+        }
+      }
+    }
+  }
+}

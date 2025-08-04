@@ -1,0 +1,120 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+}
+
+.tag {
+  background: linear-gradient(to right, #00f5b0, #00ff80);
+  padding: 3px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 600;
+}
+
+/* Grupo del select y input juntos */
+.input-group {
+  display: flex;
+  max-width: 390px;
+  gap: 0;
+}
+.input-celular {
+  max-width: 360px;
+  gap: 0;
+}
+
+.input-group select {
+  border: 1px solid #000;
+  border-radius: 8px 0 0 8px;
+  padding: 14px;
+  font-size: 14px;
+  width: 130px;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-group input[type='text'] {
+  border: 1px solid #000;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  padding: 14px;
+  font-size: 14px;
+  flex: 1;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Input para celular */
+input[type='tel'] {
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Hover y focus para todos los inputs y selects */
+input[type='text']:hover,
+input[type='tel']:hover,
+select:hover,
+input[type='text']:focus,
+input[type='tel']:focus,
+select:focus {
+  border-color: #000000cc;
+}
+
+/* Checkboxes */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+input[type='checkbox']:hover {
+  border-color: #000000cc;
+}
+
+input[type='checkbox']:checked {
+  background-color: #000;
+  border-color: #000;
+}
+
+input[type='checkbox']:checked::before {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  left: 4px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}

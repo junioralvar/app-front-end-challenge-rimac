@@ -1,5 +1,5 @@
 import styles from './Header.module.scss'
-import logoRimac from '../assets/logo-rimac.png'
+import logoRimac from '../../assets/logo-rimac.png'
 import { FaPhoneAlt } from 'react-icons/fa'
 
 export const Header = () => {

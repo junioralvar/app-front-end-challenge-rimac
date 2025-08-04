@@ -1,0 +1,47 @@
+@use 'sass:math';
+
+$breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 900px,
+  lg: 1200px,
+  xl: 1536px,
+);
+
+$breakpoint-names: map-keys($breakpoints);
+
+@each $bp, $min in $breakpoints {
+  $index: index($breakpoint-names, $bp);
+  $next-bp: nth($breakpoint-names, $index + 1);
+  $max: if($next-bp, map-get($breakpoints, $next-bp), null);
+
+  @if $max {
+    @media (min-width: $min) and (max-width: #{$max - 1px}) {
+      .hide-#{$bp} {
+        display: none !important;
+      }
+      .only-#{$bp} {
+        display: block !important;
+      }
+    }
+    @media (max-width: #{$min - 1px}), (min-width: #{$max + 1px}) {
+      .only-#{$bp} {
+        display: none !important;
+      }
+    }
+  } @else {
+    @media (min-width: $min) {
+      .hide-#{$bp} {
+        display: none !important;
+      }
+      .only-#{$bp} {
+        display: block !important;
+      }
+    }
+    @media (max-width: #{$min - 1px}) {
+      .only-#{$bp} {
+        display: none !important;
+      }
+    }
+  }
+}
