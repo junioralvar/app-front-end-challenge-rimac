@@ -1,7 +1,7 @@
 import { Header } from '../components/header/Header'
 import { Imagen } from '../components/imagen/Imagen'
 import imgFamily from '../assets/family.png'
-import { Formulario } from '../components/formulario/formulario'
+import { Formulario } from '../components/formulario/Formulario'
 import { Footer } from '../components/footer/Footer'
 
 const BodyMovil = () => {}

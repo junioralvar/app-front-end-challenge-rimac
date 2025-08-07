@@ -31,6 +31,8 @@ export const Planes = () => {
   }, [])
 
   const fetchPlans = async (id) => {
+    console.log('fetchPlans llamando')
+
     try {
       const birthDay = localStorage.getItem('birthDay')
       let edadActual = 0
