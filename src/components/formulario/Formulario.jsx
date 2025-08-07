@@ -1,29 +1,117 @@
+import './Formulario.css'
+import { modalText, modalTitle } from '../../const'
 import { Button } from '../button/Button'
 import { Modal } from '../modal/Modal'
-import './Formulario.css'
 import { useState } from 'react'
+import { getUser } from '../../api/user.api'
+import { ButtonLoader } from '../button/ButtonLoader'
+import { useNavigate } from 'react-router-dom'
+
+const allTipoDocumento = [
+  { id: 1, nombre: 'DNI' },
+  { id: 2, nombre: 'RUC' },
+]
+
+const bodyForms = {
+  tipoDocumentoId: 1,
+  nroDoc: '',
+  nroCel: '',
+  polPriv: false,
+  polCom: false,
+}
 
 export const Formulario = () => {
-  const [tipoDocumento, setTipoDocumento] = useState('DNI')
-  const [numeroDocumento, setNumeroDocumento] = useState('')
-  const [celular, setCelular] = useState('')
-  const [aceptaPrivacidad, setAceptaPrivacidad] = useState(false)
-  const [aceptaComerciales, setAceptaComerciales] = useState(false)
+  const [body, setBody] = useState({ ...bodyForms })
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [loader, setLoader] = useState(false)
+  const navigate = useNavigate()
+  localStorage.clear()
+
+  const fetchUser = async () => {
+    try {
+      const data = await getUser()
+      localStorage.setItem('name', data.name)
+      localStorage.setItem('lastName', data.lastName)
+      localStorage.setItem('birthDay', data.birthDay)
+      localStorage.setItem('nroDoc', 30216147)
+      localStorage.setItem('nroCel', 5130216147)
+      navigate('/plans', { replace: true })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const handleOpenModal = () => setIsModalOpen(true)
   const handleCloseModal = () => setIsModalOpen(false)
 
-  const modalTitle = 'Aplicación de Términos y Condiciones'
-  const modalText = `Encontrarás información importante sobre tus derechos y obligaciones al
-utilizar nuestros servicios. Cubren aspectos clave como la privacidad, la
-seguridad y la conducta esperada. Te recomendamos encarecidamente
-familiarizarte con estos términos para estar bien informado.
+  const handleChangeBody = (e) => {
+    const { name, value, type, checked } = e.target
+    setBody({
+      ...body,
+      [name]: type === 'checkbox' ? checked : value,
+    })
+    setErrors({ ...errors, [name]: false }) // Limpia error al escribir
+  }
 
-Si tienes preguntas o inquietudes sobre los 'Términos y Condiciones', no
-dudes en ponerte en contacto con nuestro equipo de soporte. Estamos
-aquí para ayudarte y garantizar que tu experiencia sea transparente y
-segura.`
+  const validarDatos = async (e) => {
+    e.preventDefault()
+    const newErrors = {}
+    let aux = Number(body.tipoDocumentoId)
+    body.tipoDocumentoId = aux
+
+    // Validar checkboxes
+    if (!body.polPriv) newErrors.polPriv = true
+    if (!body.polCom) newErrors.polCom = true
+
+    // Validar nroDoc según tipoDocumento
+    if (body.tipoDocumentoId == 1 && body.nroDoc.length !== 8) {
+      newErrors.nroDoc = '*El documento ingresado no es válido'
+    }
+    if (body.tipoDocumentoId == 2 && body.nroDoc.length !== 11) {
+      newErrors.nroDoc = '*El documento ingresado no es válido'
+    }
+
+    // Validar nroCel
+    if (body.nroCel.length < 1) {
+      newErrors.nroCel = '*El celular ingresado no es válido'
+    }
+
+    setErrors(newErrors)
+
+    if (Object.keys(newErrors).length === 0) {
+      setLoader(true)
+
+      // Validación de usuario ficticia
+      const userIsValid =
+        body.tipoDocumentoId === 1 &&
+        body.nroDoc === '30216147' &&
+        body.nroCel === '5130216147'
+
+      if (userIsValid) {
+        try {
+          // Ejecuta en paralelo: el fetch y los 3 segundos de espera
+          await Promise.all([
+            fetchUser(),
+            new Promise((resolve) => setTimeout(resolve, 3000)),
+          ])
+        } catch (error) {
+          console.error(error)
+        } finally {
+          setLoader(false)
+        }
+      } else {
+        setTimeout(() => {
+          setErrors({
+            nroCel: 'El usuario ingresado no existe',
+          })
+          setLoader(false)
+        }, 3000)
+      }
+    } else {
+      setLoader(false)
+    }
+  }
 
   return (
     <>
@@ -37,52 +125,79 @@ segura.`
 
         <div className="input-group">
           <select
-            value={tipoDocumento}
-            onChange={(e) => setTipoDocumento(e.target.value)}
+            value={body.tipoDocumentoId}
+            name="tipoDocumentoId"
+            onChange={handleChangeBody}
             className="text-pointer"
           >
-            <option value="DNI">DNI</option>
-            <option value="CE">CE</option>
+            {allTipoDocumento.map((item) => (
+              <option value={item.id} key={item.id}>
+                {item.nombre}
+              </option>
+            ))}
           </select>
 
           <input
-            type="text"
+            type="number"
             placeholder="Nro. de documento"
-            value={numeroDocumento}
-            onChange={(e) => setNumeroDocumento(e.target.value)}
+            name="nroDoc"
+            value={body.nroDoc}
+            onChange={handleChangeBody}
+            className={errors.nroDoc ? 'input-error' : ''}
           />
         </div>
+        {errors.nroDoc && <span className="error-text">{errors.nroDoc}</span>}
 
-        <input
-          type="tel"
-          placeholder="Celular"
-          value={celular}
-          className="input-celular"
-          onChange={(e) => setCelular(e.target.value)}
-        />
+        <div className="input-wrapper">
+          <input
+            type="number"
+            placeholder="Celular"
+            value={body.nroCel}
+            className={`input-celular ${errors.nroCel ? 'input-error' : ''}`}
+            name="nroCel"
+            onChange={handleChangeBody}
+          />
+          {errors.nroCel && <span className="error-text">{errors.nroCel}</span>}
+        </div>
 
-        <label className="checkbox-group text-pointer">
+        <label
+          className={`checkbox-group text-pointer ${
+            errors.polPriv ? 'checkbox-error' : ''
+          }`}
+        >
           <input
             type="checkbox"
-            checked={aceptaPrivacidad}
-            onChange={(e) => setAceptaPrivacidad(e.target.checked)}
+            checked={body.polPriv}
+            name="polPriv"
+            onChange={handleChangeBody}
           />
           Acepto la Política de Privacidad
         </label>
 
-        <label className="checkbox-group text-pointer">
+        <label
+          className={`checkbox-group text-pointer ${
+            errors.polCom ? 'checkbox-error' : ''
+          }`}
+        >
           <input
             type="checkbox"
-            checked={aceptaComerciales}
-            onChange={(e) => setAceptaComerciales(e.target.checked)}
+            checked={body.polCom}
+            name="polCom"
+            onChange={handleChangeBody}
           />
           Acepto la Política Comunicaciones Comerciales
         </label>
+
         <p className="text-underline text-pointer" onClick={handleOpenModal}>
           Aplican terminos y condiciones
         </p>
-        <Button text={'Cotiza aqui'} />
+        {loader ? (
+          <ButtonLoader text="Cotizando..." loading={true} />
+        ) : (
+          <Button text={'Cotiza aqui'} onClick={validarDatos} />
+        )}
       </form>
+
       <Modal
         titulo={modalTitle}
         texto={modalText}
@@ -92,38 +207,3 @@ segura.`
     </>
   )
 }
-
-// import './Formulario.css'
-
-// export const Formulario = () => {
-//   return (
-//     <div className="formulario">
-//       <span className="tag">Seguro Salud Flexible</span>
-//       <h1>Creado para ti y tu familia</h1>
-//       <p>
-//         Tú eliges cuánto pagar. Ingresa tus datos, cotiza y recibe nuestra
-//         asesoría. 100% online.
-//       </p>
-
-//       <div className="inputs">
-//         <div className="input-group">
-//           <select>
-//             <option>DNI</option>
-//             <option>RUC</option>
-//           </select>
-//           <input type="text" placeholder="Nro. de documento" />
-//         </div>
-//         <input type="tel" placeholder="Celular" />
-//         <label>
-//           <input type="checkbox" /> Acepto la Política de Privacidad
-//         </label>
-//         <label>
-//           <input type="checkbox" /> Acepto la Política Comunicaciones
-//           Comerciales
-//         </label>
-//         <a href="#">Aplican Términos y Condiciones.</a>
-//         <button className="btn">Cotiza aquí</button>
-//       </div>
-//     </div>
-//   )
-// }

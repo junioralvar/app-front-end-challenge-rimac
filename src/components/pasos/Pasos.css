@@ -1,0 +1,33 @@
+.bg-morado {
+  background-color: #edeffc;
+}
+.text-morado {
+  color: #4f4fff;
+}
+
+.bg-number-active {
+  background-color: #4f4fff !important;
+  padding: 6px;
+  padding-left: 9px;
+  padding-right: 9px;
+  border-radius: 35px;
+}
+.bg-number {
+  border-color: black;
+  padding: 6px;
+  padding-left: 9px;
+  padding-right: 9px;
+  border-radius: 35px;
+}
+.icono-volver {
+  border: 1px solid #4f4fff;
+  padding: 6px;
+  padding-left: 9px;
+  padding-right: 9px;
+  border-radius: 35px;
+  margin-right: 5px;
+}
+.text-volver:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

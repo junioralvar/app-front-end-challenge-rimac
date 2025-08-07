@@ -1,0 +1,72 @@
+.card {
+  position: relative;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  font-family: sans-serif;
+  border: 2px solid transparent;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+.card-selected {
+  box-shadow: none;
+  border: 2px solid black;
+}
+
+.card-header {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* Estilo del "radio" personalizado */
+.custom-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.custom-check.checked {
+  background-color: green;
+  border-color: green;
+}
+
+.checkmark {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Contenido */
+.card-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 6px 0;
+}
+
+.card-text {
+  font-weight: 0;
+  margin: 0;
+}
+.card-img-icon {
+  width: 48px;
+  height: 48px;
+}

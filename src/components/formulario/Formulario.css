@@ -46,7 +46,7 @@ p {
   transition: border-color 0.3s;
 }
 
-.input-group input[type='text'] {
+.input-group input[type='number'] {
   border: 1px solid #000;
   border-left: none;
   border-radius: 0 8px 8px 0;
@@ -58,7 +58,7 @@ p {
 }
 
 /* Input para celular */
-input[type='tel'] {
+input[type='number'] {
   border: 1px solid #000;
   border-radius: 8px;
   padding: 14px;
@@ -69,11 +69,11 @@ input[type='tel'] {
 }
 
 /* Hover y focus para todos los inputs y selects */
-input[type='text']:hover,
-input[type='tel']:hover,
+input[type='number']:hover,
+input[type='number']:hover,
 select:hover,
-input[type='text']:focus,
-input[type='tel']:focus,
+input[type='number']:focus,
+input[type='number']:focus,
 select:focus {
   border-color: #000000cc;
 }
@@ -117,4 +117,23 @@ input[type='checkbox']:checked::before {
   color: #fff;
   font-size: 16px;
   font-weight: bold;
+}
+/* ERRORES */
+.input-error {
+  border: 1px solid red !important;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block !important;
+}
+
+.checkbox-error {
+  color: red;
+}
+
+.checkbox-error input[type='checkbox'] {
+  accent-color: red;
 }

@@ -1,9 +1,11 @@
 import './Button.css'
 
-export const Button = ({ text, onClick }) => {
+export const Button = ({ text, onClick, bgColor = '#000' }) => {
   return (
     <div>
-      <button onClick={onClick}>{text}</button>
+      <button onClick={onClick} style={{ backgroundColor: bgColor }}>
+        {text}
+      </button>
     </div>
   )
 }

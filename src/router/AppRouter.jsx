@@ -7,8 +7,8 @@ export const AppRouter = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Seguro />} />
-      <Route path="/resumen" element={<Resumen />} />
-      <Route path="/planes" element={<Planes />} />
+      <Route path="/summary" element={<Resumen />} />
+      <Route path="/plans" element={<Planes />} />
       <Route path="*" element={'Oops!!! ... Ruta no encontrada'} />
     </Routes>
   </BrowserRouter>
