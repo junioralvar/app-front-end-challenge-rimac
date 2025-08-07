@@ -12,7 +12,3 @@ Si tienes preguntas o inquietudes sobre los 'Términos y Condiciones', no
 dudes en ponerte en contacto con nuestro equipo de soporte. Estamos
 aquí para ayudarte y garantizar que tu experiencia sea transparente y
 segura.`
-export const iconClinica =
-  'https://reto-rimac-2025.netlify.app/IcHospitalLight.svg'
-export const iconCasa = 'https://reto-rimac-2025.netlify.app/IcHomeLight.svg'
-export const iconUser = 'https://reto-rimac-2025.netlify.app/IcUsers.svg'

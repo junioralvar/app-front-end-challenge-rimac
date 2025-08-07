@@ -1,6 +1,5 @@
-import { iconUser } from '../../const'
 import './CardHorizontal.css'
-
+import IcUsers from '../../assets/IcUsers.png'
 export const CardHorizontal = ({
   nombreCompleto,
   nroDoc,
@@ -12,7 +11,7 @@ export const CardHorizontal = ({
     <div className="card-horizontal">
       <h4 className="card-title">Precios calculados para:</h4>
       <div className="card-header px-4 pt-1">
-        <img src={iconUser} alt="icono" />
+        <img src={IcUsers} alt="icono" />
         <h2 className="card-title">{nombreCompleto}</h2>
       </div>
       <hr className="card-divider" />

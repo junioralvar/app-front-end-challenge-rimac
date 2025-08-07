@@ -5,25 +5,28 @@ import { getPlans } from '../api/plans.api'
 import { DateTime } from 'luxon'
 import { useNavigate } from 'react-router-dom'
 import { CardVertical } from '../components/card/CardVertical'
-import { iconCasa, iconClinica } from '../const'
+
 import { Pasos } from '../components/pasos/Pasos'
 import IcAddUserLight from '../assets/IcAddUserLight.png'
 import IcProtectionLight from '../assets/IcProtectionLight.png'
+import IcHospitalLight from '../assets/IcHospitalLight.png'
+import IcHomeLight from '../assets/IcHomeLight.png'
 
 export const Planes = () => {
   const [selectedCard, setSelectedCard] = useState(null)
   const [planes, setPlanes] = useState()
+  const [isValidUser, setIsValidUser] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (
-      !(
-        localStorage.getItem('birthDay') &&
-        localStorage.getItem('lastName') &&
-        localStorage.getItem('name')
-      )
-    ) {
+    const birthDay = localStorage.getItem('birthDay')
+    const lastName = localStorage.getItem('lastName')
+    const name = localStorage.getItem('name')
+
+    if (!(birthDay && lastName && name)) {
       navigate('/', { replace: true })
+    } else {
+      setIsValidUser(true)
     }
   }, [])
 
@@ -59,17 +62,20 @@ export const Planes = () => {
   }
 
   const planSeleccionado = (item) => {
-    console.log('item ', item)
     localStorage.setItem('planName', item.name)
     localStorage.setItem('price', item.price)
     navigate('/summary', { replace: true })
   }
 
   const volver = () => {
-    localStorage.clear()
+    localStorage.removeItem('birthDay')
+    localStorage.removeItem('lastName')
+    localStorage.removeItem('name')
+    localStorage.removeItem('planName')
+    localStorage.removeItem('price')
     navigate('/')
   }
-
+  if (!isValidUser) return <>Cargando...</>
   return (
     <>
       <Header />
@@ -107,8 +113,8 @@ export const Planes = () => {
               <CardVertical
                 icon={
                   item.name === 'Plan en Casa y Clínica'
-                    ? iconClinica
-                    : iconCasa
+                    ? IcHospitalLight
+                    : IcHomeLight
                 }
                 title={item.name}
                 subtitle1="COSTO DEL PLAN"
