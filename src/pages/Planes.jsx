@@ -69,19 +69,19 @@ export const Planes = () => {
     navigate('/summary', { replace: true })
   }
 
-  // const volver = () => {
-  //   localStorage.removeItem('birthDay')
-  //   localStorage.removeItem('lastName')
-  //   localStorage.removeItem('name')
-  //   localStorage.removeItem('planName')
-  //   localStorage.removeItem('price')
-  //   navigate('/')
-  // }
+  const volver = () => {
+    localStorage.removeItem('birthDay')
+    localStorage.removeItem('lastName')
+    localStorage.removeItem('name')
+    localStorage.removeItem('planName')
+    localStorage.removeItem('price')
+    navigate('/')
+  }
   if (!isValidUser) return <>Cargando...</>
   return (
     <>
       <Header />
-      {/* <Pasos step2={false} onClick={() => volver()} /> */}
+      <Pasos step2={false} onClick={() => volver()} />
       <div className="grid-container px-5">
         <div className="grid-item col-xs-6 hide-xs"></div>
         <div className="grid-item col-xs-12 text-center">
