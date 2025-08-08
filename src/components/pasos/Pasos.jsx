@@ -3,13 +3,15 @@ export const Pasos = ({ step2, onClick }) => {
   return (
     <>
       <div className="grid-container px-5 bg-morado">
+         <div className="grid-item col-xs-12 only-xs fw-bold" >
+          <span className="icono-volver" style={{cursor:'pointer'}}onClick={onClick}>{'<'}</span>{step2 ?'PASO 2 DE 2':'PASO 1 DE 2'}
+        </div>
         <div className="grid-item col-xs-6 hide-xs fw-bold">
           <span className="bg-number-active">1</span> Planes y coberturas - - -
         </div>
         <div
-          className={`grid-item col-xs-6 hide-xs ${
-            step2 ? 'fw-bold' : 'text-muted'
-          }`}
+          className={`grid-item col-xs-6 hide-xs ${step2 ? 'fw-bold' : 'text-muted'
+            }`}
         >
           <span className={`${step2 ? 'bg-number-active' : 'bg-number'}`}>
             2
@@ -24,6 +26,7 @@ export const Pasos = ({ step2, onClick }) => {
             Volver
           </span>
         </div>
+       
       </div>
     </>
   )

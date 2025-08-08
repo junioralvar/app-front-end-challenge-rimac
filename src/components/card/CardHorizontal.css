@@ -1,70 +1,99 @@
 .card-horizontal {
-  width: 928px;
-  height: 308px;
+  width: 100%;
+  /* max-width: 928px; */
   border-radius: 32px;
   background-color: #ffffff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: flex !important;
+  flex-direction: column !important; /* asegura que todo esté apilado */
   box-sizing: border-box;
   position: relative;
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Título principal */
+.main-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #333;
+  display: block;
 }
 
-.card-title {
+/* Header con icono + nombre en fila */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.user-icon {
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain;
+}
+
+.card-name {
   font-size: 20px;
   font-weight: bold;
   margin: 0;
 }
 
-.card-header img {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
+/* Línea divisoria */
+.card-divider {
+  margin: 12px 0;
+  border: none;
+  border-top: 1px solid #ddd;
 }
 
-.card-icon {
-  font-size: 24px;
-  color: #000;
+/* Contenido del cuerpo */
+.card-body {
+  font-size: 14px;
+  color: #666;
 }
 
 .card-subtitle {
   font-size: 14px;
   color: #666;
-  margin: 8px 0 0 0;
+  margin: 6px 0 0 0;
 }
 
-.card-divider {
-  margin: 16px 0;
-  border: none;
-  border-top: 1px solid #ddd;
+.fw-bolder {
+  font-weight: bold;
 }
 
-.card-description {
-  list-style: disc inside;
-  padding: 0;
-  margin: 0;
-  flex-grow: 1;
-  color: #333;
-  font-size: 16px;
-  letter-spacing: 0.3px; /* espacio entre letras */
-  line-height: 2.4; /* espacio entre líneas */
+/* Responsividad */
+@media (max-width: 768px) {
+  .card-horizontal {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .main-title {
+    font-size: 16px;
+  }
+
+  .user-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-name {
+    font-size: 18px;
+  }
 }
 
-.card-list-item {
-  margin-bottom: 14px;
-}
+@media (max-width: 480px) {
+  .card-horizontal {
+    padding: 12px;
+  }
 
-.card-button-container {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  right: 24px;
+  .main-title {
+    font-size: 14px;
+  }
+
+  .card-name {
+    font-size: 16px;
+  }
 }
