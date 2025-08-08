@@ -11,6 +11,7 @@ import IcAddUserLight from '../assets/IcAddUserLight.png'
 import IcProtectionLight from '../assets/IcProtectionLight.png'
 import IcHospitalLight from '../assets/IcHospitalLight.png'
 import IcHomeLight from '../assets/IcHomeLight.png'
+import { API_PLANS } from '../const'
 
 export const Planes = () => {
   const [selectedCard, setSelectedCard] = useState(null)
@@ -31,8 +32,6 @@ export const Planes = () => {
   }, [])
 
   const fetchPlans = async (id) => {
-    console.log('fetchPlans llamando')
-
     try {
       const birthDay = localStorage.getItem('birthDay')
       let edadActual = 0
@@ -55,6 +54,7 @@ export const Planes = () => {
       }
       setPlanes({ list: planesFinales })
     } catch (error) {
+      alert(error + '\nError en la API:\n' + API_PLANS)
       console.error('Ocurrió un error al cargar los planes:', error)
     }
   }
@@ -69,19 +69,19 @@ export const Planes = () => {
     navigate('/summary', { replace: true })
   }
 
-  const volver = () => {
-    localStorage.removeItem('birthDay')
-    localStorage.removeItem('lastName')
-    localStorage.removeItem('name')
-    localStorage.removeItem('planName')
-    localStorage.removeItem('price')
-    navigate('/')
-  }
+  // const volver = () => {
+  //   localStorage.removeItem('birthDay')
+  //   localStorage.removeItem('lastName')
+  //   localStorage.removeItem('name')
+  //   localStorage.removeItem('planName')
+  //   localStorage.removeItem('price')
+  //   navigate('/')
+  // }
   if (!isValidUser) return <>Cargando...</>
   return (
     <>
       <Header />
-      <Pasos step2={false} onClick={() => volver()} />
+      {/* <Pasos step2={false} onClick={() => volver()} /> */}
       <div className="grid-container px-5">
         <div className="grid-item col-xs-6 hide-xs"></div>
         <div className="grid-item col-xs-12 text-center">

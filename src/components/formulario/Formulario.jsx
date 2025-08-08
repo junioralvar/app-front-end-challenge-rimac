@@ -1,5 +1,5 @@
 import './Formulario.css'
-import { modalText, modalTitle } from '../../const'
+import { API_USER, modalText, modalTitle } from '../../const'
 import { Button } from '../button/Button'
 import { Modal } from '../modal/Modal'
 import { useState } from 'react'
@@ -38,6 +38,7 @@ export const Formulario = () => {
       localStorage.setItem('nroCel', 5130216147)
       navigate('/plans', { replace: true })
     } catch (error) {
+      alert(error + '\nError con la API:\n ' + API_USER)
       console.error(error)
     }
   }

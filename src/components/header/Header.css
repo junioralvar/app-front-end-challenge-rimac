@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+.navbar-col {
+  display: flex;
+  align-items: center;
+}
+
+.logo-col {
+  flex: 1;
+}
+
+.right-col {
+  margin-left: 16px;
+}
+
+.logo {
+  height: 36px;
+  width: 73.19px;
+}
+
+/* Ocultar en XS (pantallas < 600px) */
+@media (max-width: 599px) {
+  .hide-xs {
+    display: none !important;
+  }
+}

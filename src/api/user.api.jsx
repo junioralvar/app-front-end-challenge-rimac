@@ -6,6 +6,7 @@ export const getUser = async () => {
     const { data } = await axios.get(API_USER)
     return data
   } catch (error) {
+    alert(error + '\nError con la API:\n ' + API_USER)
     return error
   }
 }

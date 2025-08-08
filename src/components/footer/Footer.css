@@ -1,14 +1,50 @@
 .footer {
+  background-color: #03050f;
+  color: white;
+  padding: 1rem;
+}
+
+/* Vista de escritorio */
+.footer-desktop {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 50px;
-  background-color: #000;
-  font-size: 14px;
-  height: 80px;
-  flex-shrink: 0; /* <- evita que se reduzca si hay poco contenido */
 }
 
-.footer-logo {
-  height: 42px;
+.logo-desktop {
+  width: 85.37px;
+  height: 41.99px;
+}
+
+.text-desktop {
+  font-size: 0.9rem;
+}
+
+/* Ocultar vista móvil por defecto */
+.footer-mobile {
+  display: none;
+}
+
+/* Vista móvil */
+@media (max-width: 767px) {
+  .footer-desktop {
+    display: none;
+  }
+
+  .footer-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo-mobile {
+    width: 138px;
+    height: 20px;
+  }
+
+  .text-mobile {
+    font-size: 0.75rem;
+    text-align: center;
+  }
 }
